@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VE2B Supplementary Package for TA Sample Practice</title>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #f4f7f6;
+            --border-color: #ccc;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--secondary-color);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .instructions {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            vertical-align: top;
+        }
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: left;
+        }
+        .turn-col { width: 8%; text-align: center; font-weight: bold; }
+        .role-col { width: 12%; text-align: center; font-weight: bold; color: #444; }
+        .dialogue-col { width: 80%; }
+        
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin: 6px 0;
+            flex-wrap: wrap;
+        }
+        input[type="text"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 6px 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        input.correct {
+            border-color: var(--success-color);
+            background-color: #e8f5e9;
+        }
+        input.incorrect {
+            border-color: var(--error-color);
+            background-color: #ffebee;
+        }
+        .inline-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .inline-btn:hover {
+            background-color: #004085;
+        }
+        .reveal-btn {
+            background-color: #6c757d;
+        }
+        .reveal-btn:hover {
+            background-color: #5a6268;
+        }
+        .global-container {
+            text-align: center;
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        button.global-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: background 0.2s;
+        }
+        button.global-btn:hover {
+            background-color: #004085;
+        }
+        .feedback-note {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="instructions">Complete the dialogue and use the check or reveal buttons next to each blank.</div>
+
+    <form id="dialogueForm">
+        <table>
+            <thead>
+                <tr>
+                    <th>Turn</th>
+                    <th>Role</th>
+                    <th>Dialogue</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Turn 1 -->
+                <tr>
+                    <td rowspan="2" class="turn-col">1</td>
+                    <td class="role-col">B</td>
+                    <td class="dialogue-col">
+                        Good morning. 
+                        <div class="input-group">
+                            <input type="text" data-answer="Fanny Lee" data-alt-answers="Fanny" placeholder="[Name of Student B]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div> speaking.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="role-col">A</td>
+                    <td class="dialogue-col">
+                        Good morning, 
+                        <div class="input-group">
+                            <input type="text" data-answer="Fanny" placeholder="[Partner Name]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>. This is 
+                        <div class="input-group">
+                            <input type="text" data-answer="Mark Chan" data-alt-answers="Mark" placeholder="[Your Name]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>.<br>
+                        I’m calling to talk about the 
+                        <div class="input-group">
+                            <input type="text" data-answer="promotional offers" data-alt-answers="offers" placeholder="[topic]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div> for 
+                        <div class="input-group">
+                            <input type="text" data-answer="a new membership scheme" placeholder="[situation context]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>.
+                    </td>
+                </tr>
+
+                <!-- Turn 2 -->
+                <tr>
+                    <td class="turn-col" rowspan="2">2</td>
+                    <td class="role-col">B</td>
+                    <td class="dialogue-col">Sure / No problem / Certainly.</td>
+                </tr>
+                <tr>
+                    <td class="role-col">A</td>
+                    <td class="dialogue-col">
+                        About the 
+                        <div class="input-group">
+                            <input type="text" data-answer="promotional offers" data-alt-answers="offers" placeholder="[topic]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>, which 
+                        <div class="input-group">
+                            <input type="text" data-answer="one" data-alt-answers="suggestion" placeholder="[option keyword]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div> do you 
+                        <div class="input-group">
+                            <input type="text" data-answer="prefer" placeholder="[preference verb]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>?
+                    </td>
+                </tr>
+
+                <!-- Turn 3 -->
+                <tr>
+                    <td class="turn-col" rowspan="2">3</td>
+                    <td class="role-col">B</td>
+                    <td class="dialogue-col">
+                        <div class="input-group">
+                            <input type="text" data-answer="I’d prefer offering a gift card" data-alt-answers="I’d prefer to offer a gift card | I would prefer to offer a gift card | I would prefer offering a gift card | My preference would be for offering a gift card" placeholder="[Express preference]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div> because 
+                        <div class="input-group">
+                            <input type="text" data-answer="it is convenient to use" placeholder="[Reason part 1]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>.<br>
+                        <div class="input-group">
+                            <input type="text" data-answer="Our members can use the gift card if they do not want to pay in cash or by credit card" placeholder="[Reason part 2]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="role-col">A</td>
+                    <td class="dialogue-col">
+                        Mmm… 
+                        <div class="input-group">
+                            <input type="text" data-answer="I’m not sure about that" data-alt-answers="I am not sure about that" placeholder="[Rejection phrase]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div> as 
+                        <div class="input-group">
+                            <input type="text" data-answer="a gift card usually has an expiry date, which may upset our members if they forget to use it" placeholder="[Con/Reason against]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>.
+                    </td>
+                </tr>
+
+                <!-- Turn 4 -->
+                <tr>
+                    <td class="turn-col" rowspan="2">4</td>
+                    <td class="role-col">B</td>
+                    <td class="dialogue-col">
+                        I see. 
+                        <div class="input-group">
+                            <input type="text" data-answer="What is your preference for promotional offers" data-alt-answers="Which one would you prefer" placeholder="[Ask partner's preference]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>?
+                    </td>
+                </tr>
+                <tr>
+                    <td class="role-col">A</td>
+                    <td class="dialogue-col">
+                        <div class="input-group">
+                            <input type="text" data-answer="I’d prefer offering a free trial class" data-alt-answers="I would prefer offering a free trial class | I’d prefer to offer a free trial class | I would prefer to offer a free trial class" placeholder="[Express alternative preference]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div> because 
+                        <div class="input-group">
+                            <input type="text" data-answer="it allows potential members to experience our facilities before joining" placeholder="[Reason from research]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>.
+                    </td>
+                </tr>
+
+                <!-- Turn 5 -->
+                <tr>
+                    <td class="turn-col" rowspan="2">5</td>
+                    <td class="role-col">B</td>
+                    <td class="dialogue-col">
+                        I see your point, but 
+                        <div class="input-group">
+                            <input type="text" data-answer="it might attract people who only want free classes without committing to a membership" placeholder="[Reject partner's preference]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="role-col">A</td>
+                    <td class="dialogue-col">I think you’re right.</td>
+                </tr>
+
+                <!-- Turn 6 -->
+                <tr>
+                    <td class="turn-col" rowspan="2">6</td>
+                    <td class="role-col">B</td>
+                    <td class="dialogue-col">
+                        What about 
+                        <div class="input-group">
+                            <input type="text" data-answer="a one-year free membership" placeholder="[Shared option]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>?<br> 
+                        I’d prefer it as 
+                        <div class="input-group">
+                            <input type="text" data-answer="it helps retain existing members" placeholder="[Reason]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="role-col">A</td>
+                    <td class="dialogue-col">
+                        Yes, I agree. I’d also prefer 
+                        <div class="input-group">
+                            <input type="text" data-answer="offering a one-year free membership" placeholder="[Restate choice]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div> because 
+                        <div class="input-group">
+                            <input type="text" data-answer="it can attract new members easily" placeholder="[Reason]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>.
+                    </td>
+                </tr>
+
+                <!-- Turn 7 -->
+                <tr>
+                    <td class="turn-col" rowspan="2">7</td>
+                    <td class="role-col">B</td>
+                    <td class="dialogue-col">
+                        Yes, you’ve got a point.  Let’s choose 
+                        <div class="input-group">
+                            <input type="text" data-answer="a one-year free membership" placeholder="[Final choice]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div> then.<br>  
+                        So 
+                        <div class="input-group">
+                            <input type="text" data-answer="we have our preference" placeholder="[Wrap-up phrase]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>, 
+                        <div class="input-group">
+                            <input type="text" data-answer="right" placeholder="[tag question]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>?
+                    </td>
+                </tr>
+                <tr>
+                    <td class="role-col">A</td>
+                    <td class="dialogue-col">
+                        Yes, I think that’s it. 
+                        <div class="input-group">
+                            <input type="text" data-answer="Thanks for your help" data-alt-answers="Thank you for your help" placeholder="[Expressing thanks]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>.
+                    </td>
+                </tr>
+
+                <!-- Turn 8 -->
+                <tr>
+                    <td class="turn-col" rowspan="2">8</td>
+                    <td class="role-col">B</td>
+                    <td class="dialogue-col">
+                        <div class="input-group">
+                            <input type="text" data-answer="Thanks for your help" data-alt-answers="You're welcome|Thank you for your help" placeholder="[Expressing thanks]">
+                            <button type="button" class="inline-btn" onclick="checkSingle(this)">Check</button>
+                            <button type="button" class="inline-btn reveal-btn" onclick="revealSingle(this)">Reveal</button>
+                        </div>.  Goodbye.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="role-col">A</td>
+                    <td class="dialogue-col">Goodbye.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="global-container">
+            <button type="button" class="global-btn" onclick="checkAllAnswers()">Check All</button>
+            <button type="button" class="global-btn" onclick="revealAllAnswers()" style="background-color: #6c757d;">Reveal All</button>
+            <button type="button" class="global-btn" onclick="resetForm()" style="background-color: #dc3545;">Reset All</button>
+        </div>
+        <div id="feedback" class="feedback-note"></div>
+    </form>
+</div>
+
+<script>
+    function validateInput(input) {
+        let userVal = input.value.trim().toLowerCase();
+        let primaryAnswer = input.getAttribute('data-answer').toLowerCase();
+        let altString = input.getAttribute('data-alt-answers');
+        
+        let acceptedAnswers = [primaryAnswer];
+        if (altString) {
+            let alts = altString.split('|').map(ans => ans.trim().toLowerCase());
+            acceptedAnswers = acceptedAnswers.concat(alts);
+        }
+        
+        return acceptedAnswers.includes(userVal);
+    }
+
+    function checkSingle(button) {
+        const input = button.previousElementSibling;
+        if (validateInput(input)) {
+            input.classList.remove('incorrect');
+            input.classList.add('correct');
+        } else {
+            input.classList.remove('correct');
+            input.classList.add('incorrect');
+        }
+    }
+
+    function revealSingle(button) {
+        const input = button.previousElementSibling.previousElementSibling;
+        input.value = input.getAttribute('data-answer');
+        input.classList.remove('incorrect');
+        input.classList.add('correct');
+    }
+
+    function checkAllAnswers() {
+        const inputs = document.querySelectorAll('input[type="text"]');
+        let correctCount = 0;
+        let totalInputs = inputs.length;
+
+        inputs.forEach(input => {
+            if (validateInput(input)) {
+                input.classList.remove('incorrect');
+                input.classList.add('correct');
+                correctCount++;
+            } else {
+                input.classList.remove('correct');
+                input.classList.add('incorrect');
+            }
+        });
+
+        const feedback = document.getElementById('feedback');
+        feedback.style.color = correctCount === totalInputs ? '#28a745' : '#d9534f';
+        feedback.textContent = `You got ${correctCount} out of ${totalInputs} fields correct!`;
+    }
+
+    function revealAllAnswers() {
+        const inputs = document.querySelectorAll('input[type="text"]');
+        inputs.forEach(input => {
+            input.value = input.getAttribute('data-answer');
+            input.classList.remove('incorrect');
+            input.classList.add('correct');
+        });
+        document.getElementById('feedback').style.color = '#0056b3';
+        document.getElementById('feedback').textContent = 'All answers revealed!';
+    }
+
+    function resetForm() {
+        const inputs = document.querySelectorAll('input[type="text"]');
+        inputs.forEach(input => {
+            input.value = '';
+            input.classList.remove('correct', 'incorrect');
+        });
+        document.getElementById('feedback').textContent = '';
+    }
+</script>
+
+</body>
+</html>
